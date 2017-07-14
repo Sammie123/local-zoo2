@@ -15,61 +15,61 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/studios", (request, response) -> {
+    get("/stylists", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      model.put("studios", Studio.all());
-      model.put("template", "templates/studios.vtl");
+      model.put("stylists", Stylist.all());
+      model.put("template", "templates/stylists.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/studios/:id", (request, response) -> {
+    get("/stylists/:id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      Studio studio = Studio.find(Integer.parseInt(request.params(":id")));
-      model.put("studio", studio);
-      model.put("template", "templates/studio.vtl");
+      Stylist stylist = Stylist.find(Integer.parseInt(request.params(":id")));
+      model.put("stylist", stylist);
+      model.put("template", "templates/stylist.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/studios-new", (request, response) -> {
+    get("/stylists-new", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      model.put("template", "templates/studio-form.vtl");
+      model.put("template", "templates/stylist-form.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    post("/studios", (request, response) -> {
+    post("/stylists", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       String name = request.queryParams("name");
-      Studio newStudio = new Studio(name);
-      newStudio.save();
-      model.put("template", "templates/studio-success.vtl");
+      Stylist newStylist = new Stylist(name);
+      newStylist.save();
+      model.put("template", "templates/stylist-success.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/studios/:studio_id/movies/:movie_id", (request, response) -> {
+    get("/stylists/:stylist_id/clients/:client_id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      Studio studio = Studio.find(Integer.parseInt(request.params(":studio_id")));
-      Movie movie = Movie.find(Integer.parseInt(request.params(":movie_id")));
-      model.put("movie", movie);
-      model.put("template", "templates/movie.vtl");
+      Stylist stylist = Stylist.find(Integer.parseInt(request.params(":stylist_id")));
+      Client client = Client.find(Integer.parseInt(request.params(":client_id")));
+      model.put("client", client);
+      model.put("template", "templates/client.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("studios/:id/movies-new", (request, response) -> {
+    get("stylists/:id/clients-new", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      Studio studio = Studio.find(Integer.parseInt(request.params(":id")));
-      model.put("studio", studio);
-      model.put("template", "templates/studio-movies-form.vtl");
+      Stylist stylist = Stylist.find(Integer.parseInt(request.params(":id")));
+      model.put("stylist", stylist);
+      model.put("template", "templates/stylist-clients-form.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    post("/movies", (request, response) -> {
+    post("/clients", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      Studio studio = Studio.find(Integer.parseInt(request.queryParams("studioId")));
+      Stylist stylist = Stylist.find(Integer.parseInt(request.queryParams("stylistId")));
       String name = request.queryParams("name");
-      Movie newMovie = new Movie(name, studio.getId());
-      newMovie.save();
-      model.put("studio", studio);
-      model.put("template", "templates/studio-movie-success.vtl");
+      Client newClient = new Client(name, stylist.getId());
+      newClient.save();
+      model.put("stylist", stylist);
+      model.put("template", "templates/stylist-client-success.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
   }
