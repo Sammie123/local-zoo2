@@ -52,7 +52,7 @@ public class StylistTest {
     assertEquals(Stylist.find(secondStylist.getId()), secondStylist);
   }
 
-  Test
+  @Test
   public void all_returnsAllInstances_true() {
     Stylist firstStylist = new Stylist("Lincoln");
     firstStylist.save();
@@ -91,14 +91,14 @@ public class StylistTest {
     assertTrue(testStylist.getId() > 0);
   }
 
-  @Test
-  public void find_returnsWithSameId_second() {
-    Stylist firstStylist = new Stylist("Lincoln");
-    firstStylist.save();
-    Stylist secondStylist = new Stylist("Molly");
-    secondStylist.save();
-    assertEquals(Stylist.find(secondStylist.getId(),secondStylist);
-  }
+  // @Test
+  // public void find_returnsWithSameId_second() {
+  //   Stylist firstStylist = new Stylist("Lincoln");
+  //   firstStylist.save();
+  //   Stylist secondStylist = new Stylist("Molly");
+  //   secondStylist.save();
+  //   assertEquals(Stylist.find(secondStylist.getId(),secondStylist));
+  // }
 
   @Test
   public void getClients_retrievesALlClientsFromDb_clientsList() {

@@ -20,21 +20,21 @@ public class ClientTest {
 
   @Test
   public void Client_instantiatesTrue_true() {
-    Client myClient = new Client("Molly");
+    Client myClient = new Client("Molly", 1);
     assertEquals(true, myClient instanceof Client);
   }
 
   @Test
   public void Client_instantiatesWithName_String() {
-    Client myClient = new Client("Molly");
+    Client myClient = new Client("Molly", 1);
     assertEquals("Molly", myClient.getName());
   }
 
   @Test
   public void all_returnsAllInstances_true() {
-    Client firstClient = new Client("Molly");
+    Client firstClient = new Client("Molly", 1);
     firstClient.save();
-    Client secondClient = new Client("Sam");
+    Client secondClient = new Client("Sam", 1);
     secondClient.save();
     assertEquals(true, Client.all().get(0).equals(firstClient));
     assertEquals(true, Client.all().get(1).equals(secondClient));
@@ -42,7 +42,7 @@ public class ClientTest {
 
   @Test
   public void save_assignsIdToObject() {
-    Client myClient = new Client("Molly");
+    Client myClient = new Client("Molly", 1);
     myClient.save();
     Client savedClient = Client.all().get(0);
     assertEquals(myClient.getId(), savedClient.getId());
@@ -50,16 +50,16 @@ public class ClientTest {
 
   @Test
   public void getId_instantiateWithAnID() {
-    Client myClient = new Client("Molly");
+    Client myClient = new Client("Molly", 1);
     myClient.save();
     assertTrue(myClient.getId() > 0);
   }
 
   @Test
   public void find_returnsWithSameId_secondClient() {
-    Client firstClient = new Client("Molly");
+    Client firstClient = new Client("Molly", 1);
     firstClient.save();
-    Client secondClient = new Client("Sam");
+    Client secondClient = new Client("Sam", 1);
     secondClient.save();
     assertEquals(Client.find(secondClient.getId()), secondClient);
   }
@@ -73,4 +73,14 @@ public class ClientTest {
     Client savedClient = Client.find(myClient.getId());
     assertEquals(savedClient.getStylistId(), myStylist.getId());
   }
+
+  @Test
+  public void update_updatesName_true() {
+    Client myClient = new Client("Molly", 1);
+    myClient.save();
+    myClient.update("Molly Johnson");
+    assertEquals("Molly Johnson", Client.find(myClient.getId()).getName());
+  }
+
+
 }
