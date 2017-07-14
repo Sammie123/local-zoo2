@@ -1,7 +1,22 @@
 import org.junit.*;
 import static org.junit.Assert.*;
 
+
 public class ClientTest {
+
+  @Before
+  public void setUp() {
+    DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/hair_salon_test", null, null);
+  }
+
+  @After
+  public void tearDown() {
+    try(Connection con = DB.sql2o.open()) {
+      String deleteClientsQuery = "DELETE FROM clients *;";
+      String deleteStylistsQuery = "DELETE FROM stylists *;";
+      con.createQuery(sql).executeUpdate();
+    }
+  }
 
   @Test
   public void Client_instantiatesTrue_true() {
@@ -10,9 +25,52 @@ public class ClientTest {
   }
 
   @Test
-  public void Task_instantiatesWithName_String() {
+  public void Client_instantiatesWithName_String() {
     Client myClient = new Client("Molly");
     assertEquals("Molly", myClient.getName());
   }
 
+  @Test
+  public void all_returnsAllInstances_true() {
+    Client firstClient = new Client("Molly");
+    firstClient.save();
+    Client secondClient = new Client("Sam");
+    secondClient.save();
+    assertEquals(true, Client.all().get(0).equals(firstClient));
+    assertEquals(true, Client.all().get(1).equals(secondClient));
+  }
+
+  @Test
+  public void save_assignsIdToObject() {
+    Client myClient = new Client("Molly");
+    myClient.save();
+    Client savedClient = Client.all().get(0);
+    assertEquals(myClient.getId(), savedClient.getId());
+  }
+
+  @Test
+  public void getId_instantiateWithAnID() {
+    Client myClient = new Client("Molly");
+    myClient.save();
+    assertTrue(myClient.getId() > 0);
+  }
+
+  @Test
+  public void find_returnsWithSameId_secondClient() {
+    Client firstClient = new Client("Molly");
+    firstClient.save();
+    Client secondClient = new Client("Sam");
+    secondClient.save();
+    assertEquals(Client.find(secondClient.getId()), secondClient);
+  }
+
+  @Test
+  public void save_savesIdIntoDB_true() {
+    Stylist myStylist = new Stylist("Lincoln");
+    myStylist.save();
+    Client myClient = new Client("Molly", myStylist.getId());
+    myClient.save();
+    Client savedClient = Client.find(myClient.getId());
+    assertEquals(savedClient.getStylistId(), myStylist.getId());
+  }
 }
