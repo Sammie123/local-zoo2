@@ -1,5 +1,7 @@
 import org.junit.*;
 import static org.junit.Assert.*;
+import org.sql2o.*;
+
 
 
 public class ClientTest {
@@ -14,7 +16,8 @@ public class ClientTest {
     try(Connection con = DB.sql2o.open()) {
       String deleteClientsQuery = "DELETE FROM clients *;";
       String deleteStylistsQuery = "DELETE FROM stylists *;";
-      con.createQuery(sql).executeUpdate();
+      con.createQuery(deleteClientsQuery).executeUpdate();
+      con.createQuery(deleteStylistsQuery).executeUpdate();
     }
   }
 
@@ -84,7 +87,7 @@ public class ClientTest {
 
   @Test
   public void delete_deleteClient_true() {
-    Client myClient = new Client("Molly, 1");
+    Client myClient = new Client("Molly", 1);
     myClient.save();
     int myClientId = myClient.getId();
     myClient.delete();
