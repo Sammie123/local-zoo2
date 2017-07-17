@@ -82,5 +82,14 @@ public class ClientTest {
     assertEquals("Molly Johnson", Client.find(myClient.getId()).getName());
   }
 
+  @Test
+  public void delete_deleteClient_true() {
+    Client myClient = new Client("Molly, 1");
+    myClient.save();
+    int myClientId = myClient.getId();
+    myClient.delete();
+    assertEquals(null, Client.find(myClientId));
+  }
+
 
 }
