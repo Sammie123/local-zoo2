@@ -5,20 +5,8 @@ import org.sql2o.*;
 
 public class StylistTest {
 
-  @Before
-  public void setUp() {
-    DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/hair_salon_test", null, null);
-  }
-
-  @After
-  public void tearDown() {
-    try(Connection con = DB.sql2o.open()) {
-      String deleteClientsQuery = "DELETE FROM clients *;";
-      String deleteStylistsQuery = "DELETE FROM stylists *;";
-      con.createQuery(deleteClientsQuery).executeUpdate();
-      con.createQuery(deleteStylistsQuery).executeUpdate();
-    }
-  }
+  @Rule
+  public DatabaseRule database = new DatabaseRule();
 
   @Test
   public void stylist_instantiatesTrue_true() {
@@ -90,5 +78,13 @@ public class StylistTest {
     secondClient.save();
     Client[] clients = new Client[] { firstClient, secondClient };
     assertTrue(myStylist.getClients().containsAll(Arrays.asList(clients)));
+  }
+
+  @Test
+  public void update_updatesName_true() {
+    Stylist myStylist = new Stylist("Molly");
+    myStylist.save();
+    myStylist.update("Lincoln");
+    assertEquals("Lincoln", Stylist.find(myStylist.getId()).getName());
   }
 }

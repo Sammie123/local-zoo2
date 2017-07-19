@@ -124,6 +124,7 @@ COPY clients (id, name, stylistid) FROM stdin;
 40	noob	2
 41	h	2
 42	Ron	2
+43	New Client	7
 \.
 
 
@@ -131,7 +132,7 @@ COPY clients (id, name, stylistid) FROM stdin;
 -- Name: clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: LMNH
 --
 
-SELECT pg_catalog.setval('clients_id_seq', 42, true);
+SELECT pg_catalog.setval('clients_id_seq', 43, true);
 
 
 --
@@ -139,12 +140,14 @@ SELECT pg_catalog.setval('clients_id_seq', 42, true);
 --
 
 COPY stylists (id, name) FROM stdin;
-1	Lincoln
-2	Sam
-3	Molly
-4	Dean
-5	Cas
-6	Sarah
+10	hello222
+11	witttt3
+12	New Stylist
+8	Molly2
+7	Lincoln
+14	sammy2
+13	JOE
+15	JOE2
 \.
 
 
@@ -152,7 +155,7 @@ COPY stylists (id, name) FROM stdin;
 -- Name: stylists_id_seq; Type: SEQUENCE SET; Schema: public; Owner: LMNH
 --
 
-SELECT pg_catalog.setval('stylists_id_seq', 6, true);
+SELECT pg_catalog.setval('stylists_id_seq', 15, true);
 
 
 --
