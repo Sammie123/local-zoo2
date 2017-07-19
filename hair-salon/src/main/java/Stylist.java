@@ -20,7 +20,7 @@ public class Stylist {
   }
 
   public static List<Stylist> all() {
-    String sql = "SELECT id, name FROM stylists";
+    String sql = "SELECT * FROM stylists";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Stylist.class);
     }
@@ -62,6 +62,25 @@ public class Stylist {
         .addParameter("name", this.name)
         .executeUpdate()
         .getKey();
+    }
+  }
+
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM stylists WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+
+  public void update(String name) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE stylists SET name = :name WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("name", name)
+        .addParameter("id", id)
+        .executeUpdate();
     }
   }
 }

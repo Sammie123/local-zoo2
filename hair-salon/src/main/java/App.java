@@ -59,7 +59,7 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       Stylist stylist = Stylist.find(Integer.parseInt(request.params(":id")));
       model.put("stylist", stylist);
-      model.put("template", "templates/stylist-clients-form.vtl");
+      model.put("template", "templates/stylist-client-form.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
@@ -94,5 +94,13 @@ public class App {
       model.put("template", "templates/stylist.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+  //   post("/stylists/:stylist_id/delete", (request, reponse) -> {
+  //     HashMap<String, Object> model = new HashMap<String, Object>();
+  //     Stylist stylist = Stylist.find(Integer.parseInt(request.params("stylistId")));
+  //     stylist.delete();
+  //     model.put("template", "templates/stylist.vtl");
+  //     return new ModelAndView(model, layout);
+  //   }, new VelocityTemplateEngine());
   }
 }

@@ -8,7 +8,7 @@ public class Client {
   private int id;
   private int stylistId;
 
-  public Client (String client, int stylistId) {
+  public Client (String name, int stylistId) {
     this.name = name;
     this.stylistId = stylistId;
   }
