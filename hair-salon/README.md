@@ -56,6 +56,7 @@ hair-salon
            └── java
                  ├── ClientTest.java
                  └── StylistTest.java
+                 └── DatabaseRule.java
 ```
 
 ## Setup/Installation Requirements
@@ -65,6 +66,7 @@ hair-salon
   * Once postgres installed, open terminal and type in psql
   * Type in "CREATE DATABASE hair-salon;"
   * Go into the database by "\c hair-salon"
+  * To access DB, type "psql hair_salon < media.sql" into terminal
   * You can create tables by typing in "CREATE TABLE stylists (id serial PRIMARY KEY, name varchar);"
   * You can create tables by typing in "CREATE TABLE clients (id serial PRIMARY KEY, name varchar);"
 * $ git clone this respository to local drive
