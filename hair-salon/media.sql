@@ -40,8 +40,7 @@ SET default_with_oids = false;
 
 CREATE TABLE clients (
     id integer NOT NULL,
-    name character varying,
-    stylistid integer
+    name character varying
 );
 
 
@@ -69,39 +68,6 @@ ALTER SEQUENCE clients_id_seq OWNED BY clients.id;
 
 
 --
--- Name: stylists; Type: TABLE; Schema: public; Owner: LMNH
---
-
-CREATE TABLE stylists (
-    id integer NOT NULL,
-    name character varying
-);
-
-
-ALTER TABLE stylists OWNER TO "LMNH";
-
---
--- Name: stylists_id_seq; Type: SEQUENCE; Schema: public; Owner: LMNH
---
-
-CREATE SEQUENCE stylists_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE stylists_id_seq OWNER TO "LMNH";
-
---
--- Name: stylists_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: LMNH
---
-
-ALTER SEQUENCE stylists_id_seq OWNED BY stylists.id;
-
-
---
 -- Name: clients id; Type: DEFAULT; Schema: public; Owner: LMNH
 --
 
@@ -109,22 +75,10 @@ ALTER TABLE ONLY clients ALTER COLUMN id SET DEFAULT nextval('clients_id_seq'::r
 
 
 --
--- Name: stylists id; Type: DEFAULT; Schema: public; Owner: LMNH
---
-
-ALTER TABLE ONLY stylists ALTER COLUMN id SET DEFAULT nextval('stylists_id_seq'::regclass);
-
-
---
 -- Data for Name: clients; Type: TABLE DATA; Schema: public; Owner: LMNH
 --
 
-COPY clients (id, name, stylistid) FROM stdin;
-22	hi	2
-40	noob	2
-41	h	2
-42	Ron	2
-43	New Client	7
+COPY clients (id, name) FROM stdin;
 \.
 
 
@@ -132,30 +86,7 @@ COPY clients (id, name, stylistid) FROM stdin;
 -- Name: clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: LMNH
 --
 
-SELECT pg_catalog.setval('clients_id_seq', 43, true);
-
-
---
--- Data for Name: stylists; Type: TABLE DATA; Schema: public; Owner: LMNH
---
-
-COPY stylists (id, name) FROM stdin;
-10	hello222
-11	witttt3
-12	New Stylist
-8	Molly2
-7	Lincoln
-14	sammy2
-13	JOE
-15	JOE2
-\.
-
-
---
--- Name: stylists_id_seq; Type: SEQUENCE SET; Schema: public; Owner: LMNH
---
-
-SELECT pg_catalog.setval('stylists_id_seq', 15, true);
+SELECT pg_catalog.setval('clients_id_seq', 1, false);
 
 
 --
@@ -164,14 +95,6 @@ SELECT pg_catalog.setval('stylists_id_seq', 15, true);
 
 ALTER TABLE ONLY clients
     ADD CONSTRAINT clients_pkey PRIMARY KEY (id);
-
-
---
--- Name: stylists stylists_pkey; Type: CONSTRAINT; Schema: public; Owner: LMNH
---
-
-ALTER TABLE ONLY stylists
-    ADD CONSTRAINT stylists_pkey PRIMARY KEY (id);
 
 
 --
