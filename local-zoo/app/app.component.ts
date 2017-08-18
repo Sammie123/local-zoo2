@@ -6,42 +6,9 @@ import { Animal } from './animal.model';
   template: `
     <div class="container">
       <h1>Local Zoo {{month}}/{{day}}/{{year}}</h1>
+      <animal-list [childAnimalList]="masterAnimalList" (clickSender)="editAnimal($event)"></animal-list>
       <hr>
-      <div>
-        <div *ngIf="selectedAnimal">
-          <animal-list [childAnimalList]="masterAnimalList"></animal-list>
-          <hr>
-          <h3>Edit Animal</h3>
-          <label>Enter Animal Species:</label>
-          <input [(ngModel)]="selectedAnimal.species">
-
-          <label>Enter Animal Name:</label>
-          <input [(ngModel)]="selectedAnimal.name">
-
-          <label>Enter Animal Age:</label>
-          <input [(ngModel)]="selectedAnimal.age">
-
-          <label>Enter Animal Diet:</label>
-          <input [(ngModel)]="selectedAnimal.diet">
-
-          <label>Enter Animal Location:</label>
-          <input [(ngModel)]="selectedAnimal.location">
-
-          <label>Enter Animal Caretakers:</label>
-          <input [(ngModel)]="selectedAnimal.caretakers">
-
-          <label>Enter Animal Sex:</label>
-          <input [(ngModel)]="selectedAnimal.sex">
-
-          <label>Enter Animal Likes:</label>
-          <input [(ngModel)]="selectedAnimal.likes">
-
-          <label>Enter Animal Dislikes:</label>
-          <input [(ngModel)]="selectedAnimal.dislikes">
-
-          <button (click)="finishedEditing()">Done</button>
-        </div>
-      </div>
+      <edit-animal [childSelectedAnimal]="selectedAnimal" (doneButtonClickedSender)="finishedEditing()"></edit-animal>
     </div>
   `
 })
