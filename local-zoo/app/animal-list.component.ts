@@ -5,7 +5,7 @@ import { Animal } from './animal.model';
   selector: 'animal-list',
   template: `
   <ul>
-    <li *ngFor="let currentAnimal of animals">
+    <li *ngFor="let currentAnimal of childAnimalList">
       {{currentAnimal.species}}<br>
       {{currentAnimal.name}}<br>
       {{currentAnimal.age}}<br>
