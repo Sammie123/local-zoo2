@@ -29,7 +29,7 @@ export class AnimalListComponent {
   @Input() childAnimalList: Animal[];
   @Output() clickSender = new EventEmitter();
 
-  filterByAge: string = "age";
+  filterByAge: string = " ";
 
   onChange(optionFromMenu) {
     this.filterByAge = optionFromMenu;
