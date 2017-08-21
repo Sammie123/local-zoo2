@@ -6,11 +6,11 @@ import { Animal } from './animal.model';
   template: `
   <select (change)="onChange($event.target.value)">
     <option value="allAnimals">All Animals</option>
-    <option value="ageThreeAndUp">Age Three and Up Animals</option>
+    <option value="ageThreeAndUp" selected="selected">Age Three and Up Animals</option>
   </select>
 
   <ul>
-    <li *ngFor="let currentAnimal of childAnimalList | filter-animal:filterByAge">
+    <li *ngFor="let currentAnimal of childAnimalList | filterAnimal:filterByAge">
       {{currentAnimal.species}}<br>
       {{currentAnimal.name}}<br>
       {{currentAnimal.age}}<br>
