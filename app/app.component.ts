@@ -35,7 +35,7 @@ export class AppComponent {
     this.selectedAnimal = null;
   }
 
-  AddAnimal(newAnimalFromChild: Animal) {
+  addAnimal(newAnimalFromChild: Animal) {
     this.masterAnimalList.push(newAnimalFromChild);
   }
 }

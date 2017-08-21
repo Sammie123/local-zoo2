@@ -8,7 +8,7 @@ import {Animal} from './animal.model';
 })
 
 
-export class filterAnimalPipe implements PipeTransform {
+export class FilterAnimalPipe implements PipeTransform {
   transform(input: Animal[], desiredAge) {
     var output: Animal[] = [];
     if(desiredAge === "ageThreeAndUp") {
