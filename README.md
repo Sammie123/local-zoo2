@@ -43,7 +43,7 @@ You will need the following things properly installed on your computer.
 ## Installation
 
 * `git clone <repository-url>` this repository
-* `cd local-zoo`
+* `cd local-zoo2`
 * `npm install`
 * `bower install`
 * `gulp build`

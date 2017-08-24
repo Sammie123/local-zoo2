@@ -5,23 +5,22 @@ import { Animal } from './animal.model';
   selector: 'animal-list',
   template: `
   <select (change)="onChange($event.target.value)">
-    <option value="allAnimals">All Animals</option>
-    <option value="ageThreeAndUp" selected="selected">Age Three and Up Animals</option>
+    <option value="allAnimals" selected="selected">All Animals</option>
+    <option value="ageThreeAndUp">Age Three and Up Animals</option>
   </select>
 
-  <ul>
-    <li *ngFor="let currentAnimal of childAnimalList | filterAnimal:filterByAge">
-      {{currentAnimal.species}}<br>
-      {{currentAnimal.name}}<br>
-      {{currentAnimal.age}}<br>
-      {{currentAnimal.diet}}<br>
-      {{currentAnimal.location}}<br>
-      {{currentAnimal.caretakers}}<br>
-      {{currentAnimal.sex}}<br>
-      {{currentAnimal.likes}}<br>
-      {{currentAnimal.dislikes}}<br>
-      <button (click)="editButtonHasBeenClicked(currentAnimal)">Edit</button></li>
-  </ul>
+  <div class="panel" *ngFor="let currentAnimal of childAnimalList | filterAnimal:filterByAge">
+    <h3>Species: {{currentAnimal.species}}</h3>
+    <h4>Name: {{currentAnimal.name}}</h4>
+    <h5>Age: {{currentAnimal.age}}</h5>
+    <h5>Diet: {{currentAnimal.diet}}</h5>
+    <h5>Location: {{currentAnimal.location}}</h5>
+    <h5>Caretakers: {{currentAnimal.caretakers}}</h5>
+    <h5>Sex: {{currentAnimal.sex}}</h5>
+    <h5>Likes: {{currentAnimal.likes}}</h5>
+    <h5>Dislikes: {{currentAnimal.dislikes}}</h5>
+    <button (click)="editButtonHasBeenClicked(currentAnimal)">Edit</button>
+  </div>
   `
 })
 
@@ -29,7 +28,7 @@ export class AnimalListComponent {
   @Input() childAnimalList: Animal[];
   @Output() clickSender = new EventEmitter();
 
-  filterByAge: string = " ";
+  filterByAge: string = "age";
 
   onChange(optionFromMenu) {
     this.filterByAge = optionFromMenu;

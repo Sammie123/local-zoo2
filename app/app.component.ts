@@ -5,9 +5,13 @@ import { Animal } from './animal.model';
   selector: 'app-root',
   template: `
     <div class="container">
-      <h1>Local Zoo {{month}}/{{day}}/{{year}}</h1>
-      <animal-list [childAnimalList]="masterAnimalList" (clickSender)="editAnimal($event)"></animal-list>
-      <hr>
+      <div class="jumbotron">
+        <h1>Local Zoo {{month}}/{{day}}/{{year}}</h1>
+        <animal-list [childAnimalList]="masterAnimalList" (clickSender)="editAnimal($event)"></animal-list>
+      </div>
+    </div>
+    <hr>
+    <div class="new-edit">
       <edit-animal [childSelectedAnimal]="selectedAnimal" (doneButtonClickedSender)="finishedEditing()"></edit-animal>
       <new-animal (newAnimalSender)="addAnimal($event)"></new-animal>
     </div>
